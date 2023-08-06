@@ -1,10 +1,17 @@
-<div class="content-container">
+<div class="content-container" id="Submit_Your_Suggestions">
     <h2>Submit Your Suggestions</h2>
-    <br>
-    <br>
-    <img src="https://ubannotated.com/wp-content/uploads/2018/06/UBtheNEWS-banner-672x99.jpg" alt="Image" class="thumbnail">
-    <a href="https://ubannotated.com/ubthenews/">https://ubannotated.com/ubthenews/</a>
-    <p>The UBtheNEWS project (for the most part) is about documenting how new discoveries and scientific advances increasingly support Urantia Book history. The Urantia Book asserts that “the historic facts and religious truths of this series of revelatory presentations will stand on the records of the ages to come …” and it was published in 1955. This essentially amounts to a claim of and test for a superhuman quality of credibility.</p>
-    <br>
-    <br>
+    <form action="https://formspree.io/f/xoqojowg" method="POST" enctype="multipart/form-data">
+        <label>
+            Your email:
+            <input type="email" name="email">
+        </label>
+        <label>
+            Your message:
+            <textarea name="message"></textarea>
+        </label>
+        <label for="file-upload">Upload a file:</label>
+        <input type="file" id="file-upload" name="file-upload">
+        <br>
+        <button type="submit">Submit</button>
+    </form>
 </div>
