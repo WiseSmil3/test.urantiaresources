@@ -1,30 +1,23 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = ['Text_and_Documentations', 'Images_and_Illustrations', 'Videos_and_Films', 'Music_and_Audio', 'Education_and_Courses', 'Events_and_Communities', 'Organizations', 'Material_Projects_and_Products', 'Submit_Your_Suggestions'];
+    const navbar = document.querySelector('.navbar-container');
+    const container = document.querySelector('.container');
 
+    function loadSection(section) {
+        fetch(section + '.html')
+            .then(response => response.text())
+            .then(html => {
+                container.innerHTML = html;
+            });
+    }
 
-window.addEventListener('DOMContentLoaded', (event) => {
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+    navbar.addEventListener('click', function(e) {
+        if (e.target.classList.contains('nav-link')) {
             e.preventDefault();
-            loadContent(this.getAttribute('href').substring(1));
-        });
+            const section = e.target.getAttribute('href').slice(1);
+            loadSection(section);
+        }
     });
-});
 
-function loadContent(section) {
-    fetch(`${section}.html`)
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('content').innerHTML = data;
-        })
-        .catch(error => console.error(error));
-// Load the initial content
-    loadSection('Text_and_Documentations');
-    loadSection('Images_and_Illustrations');
-    loadSection('Videos_and_Films');
-    loadSection('Music_and_Audio');
-    loadSection('Education_and_Courses');
-    loadSection('Events_and_Communities');
-    loadSection('Organizations');
-    loadSection('Projects_and_Products');
-    loadSection('Submit_Your_Suggestions');
-}
+    loadSection(sections[0]);
+});
