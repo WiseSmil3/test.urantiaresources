@@ -1,23 +1,15 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const sections = ['Text_and_Documentations', 'Images_and_Illustrations', 'Videos_and_Films', 'Music_and_Audio', 'Education_and_Courses', 'Events_and_Communities', 'Organizations', 'Material_Projects_and_Products', 'Submit_Your_Suggestions'];
-    const navbar = document.querySelector('.navbar-container');
-    const container = document.querySelector('.container');
-
-    function loadSection(section) {
-        fetch(section + '.html')
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault();
+        var targetId = this.getAttribute('href');
+        var targetElement = document.querySelector(targetId);
+        var navbarHeight = document.querySelector('.navbar').offsetHeight;
+        window.scrollTo(0, targetElement.offsetTop - navbarHeight);
+        fetch(targetId.substring(1) + '.html')
             .then(response => response.text())
-            .then(html => {
-                container.innerHTML = html;
-            });
-    }
-
-    navbar.addEventListener('click', function(e) {
-        if (e.target.classList.contains('nav-link')) {
-            e.preventDefault();
-            const section = e.target.getAttribute('href').slice(1);
-            loadSection(section);
-        }
+            .then(data => {
+                targetElement.innerHTML = data;
+            })
+            .catch(error => console.error(error));
     });
-
-    loadSection(sections[0]);
 });
