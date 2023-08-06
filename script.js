@@ -1,24 +1,19 @@
-window.addEventListener('scroll', function () {
-    var scrollY = window.scrollY;
-    var zoom = 100 + Math.log(1 + scrollY / 100) * 20;
-    document.body.style.backgroundSize = zoom + '%';
-});
+window.onload = function() {
+    loadSection('Text_and_Documentations');
+    loadSection('Images_and_Illustrations');
+    loadSection('Videos_and_Films');
+    loadSection('Music_and_Audio');
+    loadSection('Education_and_Courses');
+    loadSection('Events_and_Communities');
+    loadSection('Organizations');
+    loadSection('Material_Projects_and_Products');
+    loadSection('Submit_Your_Suggestions');
+}
 
-window.addEventListener('resize', function () {
-    var navbar = document.querySelector('.navbar');
-    if (window.innerWidth <= 600) {
-        navbar.classList.add('navbar-bottom');
-    } else {
-        navbar.classList.remove('navbar-bottom');
-    }
-});
-
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', function (e) {
-        e.preventDefault();
-        var targetId = this.getAttribute('href');
-        var targetElement = document.querySelector(targetId);
-        var navbarHeight = document.querySelector('.navbar').offsetHeight;
-        window.scrollTo(0, targetElement.offsetTop - navbarHeight);
-    });
-});
+function loadSection(sectionName) {
+    fetch(sectionName + '.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById(sectionName).innerHTML = data;
+        });
+}
