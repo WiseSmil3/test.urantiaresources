@@ -8,7 +8,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
         fetch(targetId.substring(1) + '.html')
             .then(response => response.text())
             .then(data => {
-                targetElement.innerHTML = data;
+                document.querySelector('.container').innerHTML = data;
             })
             .catch(error => console.error(error));
     });
